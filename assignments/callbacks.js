@@ -2,7 +2,7 @@
 // You have been provided an example of a problem and a solution to see how this works with our items array.
 // Study both the problem and the solution to figure out the rest of the problems.
 
-const items = ["Pencil", "Notebook", "yo-yo", "Gum", "Pencil"];
+const items = ["Pencil", "Notebook", "yo-yo", "Gum"];
 
 /* 
 
