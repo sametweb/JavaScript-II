@@ -113,7 +113,7 @@ runners
     specialThankYouList.push(item.email);
   });
 
-console.log(specialThankYouList.join("; "));
+console.log("Special Thank You List", specialThankYouList.join("; "));
 
 // Problem 3: Local Community Center's President is a smart(!) guy and wants to buy Teacoins with the donated money
 // so that money can be multiplied in a couple of days and he can get that long-desired mini fridge in his office.
