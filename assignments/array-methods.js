@@ -1,7 +1,8 @@
-// A local community center is holding a fund raising 5k fun run and has invited 50 small businesses to make a small donation on their behalf for some much needed updates to their facilities.  Each business has assigned a representative to attend the event along with a small donation.
+// A local community center is holding a fund raising 5k fun run and has invited 50 small businesses to make a small donation on their behalf
+// for some much needed updates to their facilities.  Each business has assigned a representative to attend the event along with a small donation.
 
 // Scroll to the bottom of the list to use some advanced array methods to help the event director gather some information from the businesses.
-
+//prettier-ignore
 const runners = [
   { id: 1, first_name: "Charmain", last_name: "Seiler", email: "cseiler0@wired.com", shirt_size: "2XL", company_name: "Divanoodle", donation: 75 },
   { id: 2, first_name: "Whitaker", last_name: "Ierland", email: "wierland1@angelfire.com", shirt_size: "2XL", company_name: "Wordtune", donation: 148 },
@@ -56,30 +57,83 @@ const runners = [
 ];
 
 // ==== Challenge 1: Use .forEach() ====
-// The event director needs both the first and last names of each runner for their running bibs. Combine both the first and last names and populate a new array called `fullNames`. This array will contain just strings.
+// The event director needs both the first and last names of each runner for their running bibs. Combine both the first and last names
+// and populate a new array called `fullNames`. This array will contain just strings.
 let fullNames = [];
-console.log(fullNames);
+runners.forEach(item => fullNames.push(`${item.first_name} ${item.last_name}`));
+console.log("Full names of runners", fullNames);
 
 // ==== Challenge 2: Use .map() ====
-// The event director needs to have all the runners' first names in uppercase because the director BECAME DRUNK WITH POWER. Populate an array called `firstNamesAllCaps`. This array will contain just strings.
+// The event director needs to have all the runners' first names in uppercase because the director BECAME DRUNK WITH POWER.
+// Populate an array called `firstNamesAllCaps`. This array will contain just strings.
 let firstNamesAllCaps = [];
-console.log(firstNamesAllCaps);
+runners.map(item => firstNamesAllCaps.push(item.first_name.toUpperCase()));
+console.log("All names uppercase", firstNamesAllCaps);
 
 // ==== Challenge 3: Use .filter() ====
-// The large shirts won't be available for the event due to an ordering issue. We need a filtered version of the runners array, containing only those runners with large sized shirts so they can choose a different size. This will be an array of objects.
+// The large shirts won't be available for the event due to an ordering issue.
+// We need a filtered version of the runners array, containing only those runners with
+// large sized shirts so they can choose a different size. This will be an array of objects.
 let runnersLargeSizeShirt = [];
-console.log(runnersLargeSizeShirt);
+runnersLargeSizeShirt = runners.filter(item => item.shirt_size == "L");
+console.log("Runners wearing L size shirt", runnersLargeSizeShirt);
 
 // ==== Challenge 4: Use .reduce() ====
-// The donations need to be tallied up and reported for tax purposes. Add up all the donations and save the total into a ticketPriceTotal variable.
+// The donations need to be tallied up and reported for tax purposes.
+// Add up all the donations and save the total into a ticketPriceTotal variable.
 let ticketPriceTotal = 0;
-console.log(ticketPriceTotal);
+ticketPriceTotal = runners.reduce((total, item) => total + item.donation, 0);
+console.log("Total donations:", ticketPriceTotal);
 
 // ==== Challenge 5: Be Creative ====
-// Now that you have used .forEach(), .map(), .filter(), and .reduce().  I want you to think of potential problems you could solve given the data set and the 5k fun run theme.  Try to create and then solve 3 unique problems using one or many of the array methods listed above.
+// Now that you have used .forEach(), .map(), .filter(), and .reduce().
+// I want you to think of potential problems you could solve given the data set and the 5k fun run theme.
+// Try to create and then solve 3 unique problems using one or many of the array methods listed above.
 
-// Problem 1
+// Problem 1: Local Community Center's party planning committee wants to write a thank you letter to the
+// managements of the companies from which the runners attended. So we need the unique company names listed.
 
-// Problem 2
+let uniqueCompanyNames = [];
+runners.map(item => {
+  if (!uniqueCompanyNames.includes(item.company_name)) {
+    uniqueCompanyNames.push(item.company_name);
+  }
+});
+console.log("Unique company names:", uniqueCompanyNames);
 
-// Problem 3
+// Problem 2: Local Community Center values donations higher than $200 because nobody ever donated that much
+// in the past. Now they need email addresses of those who donated over $200 so they can write special thank you emails.
+// The emails need to be seperated by semicolon (;) so they can just copy paste the entire list and send the same
+// thank you message to everyone in the list.
+
+let specialThankYouList = [];
+runners
+  .filter(item => item.donation > 199)
+  .map(item => {
+    specialThankYouList.push(item.email);
+  });
+
+console.log(specialThankYouList.join("; "));
+
+// Problem 3: Local Community Center's President is a smart(!) guy and wants to buy Teacoins with the donated money
+// so that money can be multiplied in a couple of days and he can get that long-desired mini fridge in his office.
+// Given the weekly price of Teacoins, calculate how many Teacoins he can buy with the HALF of donations in the first day
+// and other HALF of the donations in the third day and how much is his total portfolio in the seventh day of the week.
+
+const teacoinPrices = [1.22, 1.26, 1.35, 1.3, 1.29, 1.25, 1.27];
+
+totalDonations = runners.reduce((total, item) => total + item.donation, 0);
+
+const firstDayBuys = totalDonations / 2 / teacoinPrices[0];
+const thirdDayBuys = totalDonations / 2 / teacoinPrices[2];
+
+const totalCoins = firstDayBuys + thirdDayBuys;
+
+const totalPortfolioOn7thDay = totalCoins * teacoinPrices[6];
+
+console.log("Total Portfolio Worth on 7th Day", totalPortfolioOn7thDay);
+console.log("Invested Amount", totalDonations);
+console.log("Balance", totalPortfolioOn7thDay - totalDonations);
+console.log(
+  "Seems like President does not get the long-desired mini fridge LOL"
+);

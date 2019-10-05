@@ -4,9 +4,33 @@
 // that manipulates variables defined in the outer scope.
 // The outer scope can be a parent function, or the top level of the script.
 
+const allTheBooks = [
+  { id: 1, name: "100 years of solitude" },
+  { id: 2, name: "You are a badass" },
+  { id: 3, name: "under the fifth sun" }
+];
+
+function bookSearch(searchTerm, callback) {
+  let splittedName = searchTerm.split(" ");
+
+  return callback(splittedName);
+}
+
+function shelfCheck(bookNameArray) {
+  bookNameArray.map(item =>
+    allTheBooks.map(book => {
+      if (book.name.includes(item)) {
+        console.log(
+          `We have "${book.name}" that fits your search term "${item}".`
+        );
+      }
+    })
+  );
+}
+
+bookSearch("You", shelfCheck);
 
 /* STRETCH PROBLEMS, Do not attempt until you have completed all previous tasks for today's project files */
-
 
 // ==== Challenge 2: Implement a "counter maker" function ====
 const counterMaker = () => {
